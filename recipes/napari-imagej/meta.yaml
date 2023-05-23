@@ -1,0 +1,57 @@
+{% set name = "napari-imagej" %}
+{% set version = "0.1.0.dev0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  # url: file:///home/gselzer/code/imagej/napari-imagej/dist/napari-imagej-0.1.0.dev0.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: c6194b09a039054247298c35a1970bf62332f5741f83ad4ff01b98fa79a73ba6
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8,<=3.11.0
+    - setuptools >=61.2
+    - pip
+  run:
+    - python >=3.8,<=3.11.0
+    - confuse
+    - imglyb >=2.1.0
+    - jpype1 >=1.4.1
+    - labeling >=0.1.12
+    - magicgui >=0.5.1
+    - napari >=0.4.17
+    - numpy
+    - pandas
+    - pyimagej >=1.4.1
+    - scyjava >=1.8.1
+
+test:
+  imports:
+    - napari_imagej
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/imagej/napari-imagej
+  summary: ImageJ functionality from napari
+  license: BSD-2-Clause
+  license_file: LICENSE
+  doc_url: https://github.com/imagej/napari-imagej
+  dev_url: https://github.com/imagej/napari-imagej
+
+extra:
+  recipe-maintainers:
+    - ctrueden
+    - elevans
+    - gselzer
+    - hinerm
